@@ -10,6 +10,12 @@ const actorSchema = new Schema(
         },
         age: {
             type: Number,
+            required: true,
+        },
+        phone: {
+            type: String,
+            required: true,
+            unique: true,
         },
         gender: {
             type: String,

@@ -1,7 +1,7 @@
 const router = require('express').Router();
+const { createActorController } = require('../controllers/actor');
+const authenticate = require('../middlewares/authenticate');
 
-router.post('/', (req, res) => {
-    res.status(200).json({ message: 'create a actor' });
-});
+router.post('/', authenticate, createActorController);
 
 module.exports = router;

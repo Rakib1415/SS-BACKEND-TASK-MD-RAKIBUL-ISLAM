@@ -15,7 +15,7 @@ const createNewUser = ({ name, email, password, roles, accountStatus }) => {
         name,
         email,
         password,
-        roles: roles || ['STUDENT'],
+        roles: roles || ['USER'],
         accountStatus: accountStatus || 'PENDING',
     });
     return user.save();
