@@ -1,15 +1,15 @@
 const router = require('express').Router();
+const {
+    createMovieController,
+    getMoviesController,
+    getMovieController,
+} = require('../controllers/movie');
+const authenticate = require('../middlewares/authenticate');
 
-router.post('/', (req, res) => {
-    res.status(201).json({ message: 'Created a movie successfully' });
-});
+router.post('/', authenticate, createMovieController);
 
-router.get('/', (req, res) => {
-    res.status(200).json({ message: 'get all movie' });
-});
+router.get('/', getMoviesController);
 
-router.get('/:movieId', (req, res) => {
-    res.status(200).json({ message: 'get a movie' });
-});
+router.get('/:movieId', getMovieController);
 
 module.exports = router;

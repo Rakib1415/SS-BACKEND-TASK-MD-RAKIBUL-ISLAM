@@ -13,6 +13,7 @@ const directorSchema = new Schema(
         },
         contract: {
             type: String,
+            required: true,
         },
         specilization: {
             type: String,

@@ -1,7 +1,8 @@
 const router = require('express').Router();
+const authenticate = require('../middlewares/authenticate');
+const { createDirectorController, getDirectorsController } = require('../controllers/director');
 
-router.post('/', (req, res) => {
-    res.status(200).json({ message: 'create a director' });
-});
+router.post('/', authenticate, createDirectorController);
+router.get('/', getDirectorsController);
 
 module.exports = router;
