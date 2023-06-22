@@ -1,0 +1,126 @@
+/* eslint-disable newline-per-chained-call */
+const { body, validationResult } = require('express-validator');
+
+const userValidationRules = () => [
+    body('name')
+        .trim()
+        .isString()
+        .withMessage('name must be valid string')
+        .bail()
+        .isLength({ min: 2, max: 20 })
+        .withMessage('name must be 2-20 chars'),
+    body('email')
+        .normalizeEmail({ all_lowercase: true })
+        .isEmail()
+        .withMessage('please provide a valid email'),
+    body('password')
+        .isString()
+        .withMessage('password must be a valid string')
+        .bail()
+        .isLength({ min: 6, max: 16 })
+        .withMessage('password must be 6-16 chars'),
+    body('confirmPassword')
+        .isString()
+        .withMessage('confirmPassword must be a valid string')
+        .bail()
+        .custom((value, { req }) => {
+            if (value !== req.body.password) {
+                throw new Error('password does not match');
+            }
+            return true;
+        }),
+];
+
+const userLoginValidationRules = () => [
+    body('email')
+        .normalizeEmail({ all_lowercase: true })
+        .isEmail()
+        .withMessage('please provide a valid email'),
+    body('password')
+        .isString()
+        .withMessage('password must be a valid string')
+        .bail()
+        .isLength({ min: 6, max: 16 })
+        .withMessage('password must be 6-16 chars'),
+];
+
+const actorValidationRules = () => [
+    body('name')
+        .trim()
+        .isString()
+        .withMessage('name must be valid string')
+        .bail()
+        .isLength({ min: 2, max: 20 })
+        .withMessage('name must be 2-20 chars'),
+    body('age').isNumeric().withMessage('age must be a valid number').toInt(),
+    body('phone')
+        .trim()
+        .isString()
+        .withMessage('phone must be valid string')
+        .bail()
+        .isLength({ min: 11, max: 11 })
+        .withMessage('phone number must be 11 chars'),
+];
+
+const directorValidationRules = () => [
+    body('name')
+        .trim()
+        .isString()
+        .withMessage('name must be valid string')
+        .bail()
+        .isLength({ min: 2, max: 20 })
+        .withMessage('name must be 2-20 chars'),
+    body('contract')
+        .trim()
+        .isString()
+        .withMessage('phone must be valid string')
+        .bail()
+        .isLength({ min: 11, max: 11 })
+        .withMessage('phone number must be 11 chars'),
+];
+
+const movieValidationRules = () => [
+    body('name')
+        .trim()
+        .isString()
+        .withMessage('name must be valid string')
+        .bail()
+        .isLength({ min: 2, max: 20 })
+        .withMessage('name must be 2-20 chars'),
+    body('runtime').isNumeric().withMessage('runtime must be a valid number').toInt(),
+    body('rating').optional().isNumeric().withMessage('rating must be a valid number').toFloat(),
+    body('actors')
+        .isArray()
+        .withMessage('actors must be valid array')
+        .bail()
+        .isLength({ min: 10 })
+        .withMessage('actors are not allow empty array'),
+    body('director')
+        .isString()
+        .withMessage('director must be valid string')
+        .bail()
+        .isLength({ min: 4, max: 30 })
+        .withMessage('director must be valid mongoose id'),
+];
+
+const validate = (req, res, next) => {
+    const errors = validationResult(req);
+    if (errors.isEmpty()) {
+        return next();
+    }
+    const extractedErrors = [];
+    errors.array().map((err) => extractedErrors.push({ [err.path]: err.msg }));
+
+    return res.status(422).json({
+        errors: extractedErrors,
+    });
+};
+
+module.exports = {
+    userValidationRules,
+    userLoginValidationRules,
+    actorValidationRules,
+    directorValidationRules,
+    movieValidationRules,
+    validate,
+};

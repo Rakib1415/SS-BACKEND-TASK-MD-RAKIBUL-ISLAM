@@ -5,17 +5,26 @@ const jwt = require('jsonwebtoken');
 const error = require('../utils/error');
 const { findUserByProperty, createNewUser } = require('./user');
 
-const registerService = async ({ name, email, password, roles, accountStatus }) => {
+const registerService = async ({
+    name,
+    email,
+    password,
+    confirmPassword,
+    roles,
+    accountStatus,
+}) => {
     const user = await findUserByProperty('email', email);
     if (user) {
         throw error('User already exists', 400);
     }
     const salt = await bcrypt.genSalt(10);
     const hash = await bcrypt.hash(password, salt);
+    const hashConfirmPass = await bcrypt.hash(confirmPassword, salt);
     return createNewUser({
         name,
         email,
         password: hash,
+        confirmPassword: hashConfirmPass,
         roles,
         accountStatus,
     });

@@ -5,8 +5,9 @@ const {
     getMovieController,
 } = require('../controllers/movie');
 const authenticate = require('../middlewares/authenticate');
+const { movieValidationRules, validate } = require('../middlewares/validator');
 
-router.post('/', authenticate, createMovieController);
+router.post('/', movieValidationRules(), validate, authenticate, createMovieController);
 
 router.get('/', getMoviesController);
 
