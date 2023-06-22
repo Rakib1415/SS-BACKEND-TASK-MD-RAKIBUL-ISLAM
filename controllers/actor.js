@@ -1,5 +1,5 @@
 const error = require('../utils/error');
-const { createNewActor } = require('../services/actor');
+const { createNewActor, findActors } = require('../services/actor');
 
 const createActorController = async (req, res, next) => {
     const { name, age, gender, phone } = req.body;
@@ -14,6 +14,17 @@ const createActorController = async (req, res, next) => {
     }
 };
 
+const getActorsController = async (_req, res, next) => {
+    try {
+        const actors = await findActors();
+        return res.status(200).json({ message: 'success', actors });
+    } catch (e) {
+        console.log(e);
+        return next(e);
+    }
+};
+
 module.exports = {
     createActorController,
+    getActorsController,
 };

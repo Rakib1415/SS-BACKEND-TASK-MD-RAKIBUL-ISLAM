@@ -5,6 +5,7 @@ const movieSchema = new Schema(
         name: {
             type: String,
             required: true,
+            unique: true,
             minlength: [2, 'name is too short'],
             maxlength: [20, 'name is too long'],
         },

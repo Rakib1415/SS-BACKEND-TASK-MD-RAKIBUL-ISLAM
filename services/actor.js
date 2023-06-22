@@ -1,7 +1,8 @@
+/* eslint-disable implicit-arrow-linebreak */
 const Actor = require('../models/Actor');
 const error = require('../utils/error');
 
-const findActors = () => Actor.find();
+const findActors = () => Actor.find().populate('movies');
 
 const findActorByProperty = (key, value) => {
     if (key === '_id') {
