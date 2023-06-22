@@ -10,11 +10,12 @@ const findUserByProperty = (key, value) => {
     return User.findOne({ [key]: value });
 };
 
-const createNewUser = ({ name, email, password, roles, accountStatus }) => {
+const createNewUser = ({ name, email, password, confirmPassword, roles, accountStatus }) => {
     const user = new User({
         name,
         email,
         password,
+        confirmPassword,
         roles: roles || ['USER'],
         accountStatus: accountStatus || 'PENDING',
     });

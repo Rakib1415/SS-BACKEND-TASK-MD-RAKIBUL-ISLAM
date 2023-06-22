@@ -23,6 +23,11 @@ const userSchema = new Schema(
             required: true,
             minlength: [6, 'password is too short'],
         },
+        confirmPassword: {
+            type: String,
+            required: true,
+            minlength: [6, 'password is too short'],
+        },
         roles: {
             type: [String],
             required: true,
