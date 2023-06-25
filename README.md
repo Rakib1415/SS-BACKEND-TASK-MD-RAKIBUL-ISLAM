@@ -45,7 +45,7 @@ $ yarn dev
 
 ```
 
-1. Open a web browser and visit **`http://localhost:4000/health`** to view the application.
+1. Open a web browser and visit **`http://localhost:3000/health`** to view the application.
 
 ## **Built With**
 
