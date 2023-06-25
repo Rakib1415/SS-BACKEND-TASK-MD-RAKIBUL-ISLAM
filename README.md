@@ -25,6 +25,8 @@ $ git clone https://github.com/Rakib1415/SS-BACKEND-TASK-MD-RAKIBUL-ISLAM.git
 ```
 $ cd SS-BACKEND-TASK-MD-RAKIBUL-ISLAM
 
+$ git checkout movie-feature
+
 ```
 
 1. Install the dependencies:
@@ -43,7 +45,7 @@ $ yarn dev
 
 ```
 
-1. Open a web browser and visit **`http://localhost:4000/health`** to view the application.
+1. Open a web browser and visit **`http://localhost:3000/health`** to view the application.
 
 ## **Built With**
 
