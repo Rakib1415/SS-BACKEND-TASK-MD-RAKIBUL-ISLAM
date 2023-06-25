@@ -1,5 +1,5 @@
-FROM node:latest
-WORKDIR /usr/src/app
+FROM node:20.3.1
+WORKDIR /usr/src/movie_app
 COPY package.json yarn.lock ./
 
 RUN yarn
