@@ -25,6 +25,8 @@ $ git clone https://github.com/Rakib1415/SS-BACKEND-TASK-MD-RAKIBUL-ISLAM.git
 ```
 $ cd SS-BACKEND-TASK-MD-RAKIBUL-ISLAM
 
+$ git checkout movie-feature
+
 ```
 
 1. Install the dependencies:
